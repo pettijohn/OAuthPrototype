@@ -1,0 +1,30 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <AzureFunctionsVersion>v4</AzureFunctionsVersion>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="Microsoft.IdentityModel.Tokens" Version="6.26.0" />
+    <PackageReference Include="Microsoft.NET.Sdk.Functions" Version="4.1.1" />
+    <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="6.26.0" />
+  </ItemGroup>
+  <ItemGroup>
+    <!-- I was getting DLL not found exceptions; the runtime prunes too much. This forces specific DLLs to be included. -->
+    <!-- https://bryanknox.github.io/2022/07/15/functionsskipcleanoutput-and-functionspreserveddependencies.html -->
+    <FunctionsPreservedDependencies Include="Microsoft.IdentityModel.Logging.dll" />
+    <FunctionsPreservedDependencies Include="Microsoft.IdentityModel.Tokens.dll" />
+    <FunctionsPreservedDependencies Include="System.IdentityModel.Tokens.Jwt.dll" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Update="host.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="cert/privkey-rsa-2048.pkcs8.pem">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="local.settings.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <CopyToPublishDirectory>Never</CopyToPublishDirectory>
+    </None>
+  </ItemGroup>
+</Project>
