@@ -1,5 +1,7 @@
 # Minimal Authentication Prototype
 
+# !! Please do not use this, it is a learning exercise prototype. Don't roll your own authentication. Use Azure AD B2C, AWS Cognito, Auth0, etc. !!
+
 This prototype hosts a serverless (Azure Function) OpenID provider that integrates with Azure Easy Auth. 
 
 * `AuthServer` is an Azure Function that authenticates the user and returns OIDC compliant data to the caller. Before deploying, generate private keys for JWT signing - see `AuthServer/cert/commands.sh`.
